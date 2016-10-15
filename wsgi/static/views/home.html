@@ -1,0 +1,200 @@
+<div ng-controller="homeCtrl">
+    <!-- Ex: col-lg-offset-3 means that the first 3 columns is empty that cant
+        be used. The screen is always 12 columns. -->
+    <div class="col-lg-offset-3 col-md-offset-2 col-sm-offset-2 col-lg-6
+    col-md-8 col-sm-8 col-xs-12 centered container">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="searchDiv">
+            <div angucomplete-alt id="userSearchInput" 
+            placeholder="Search for users or playlists" 
+            pause="400" 
+            selected-object="selectedUserOrPlaylist" 
+            remote-url="/search?searchStr=" 
+            remote-url-data-field="data" 
+            title-field="name" 
+            minlength="1" 
+            match-class="highlight" 
+            input-class="form-control input-lg" 
+            clear-selected="true">
+            </div>
+        </div>  
+        <!-- Show this if the current user is on his on page and playlist is closed -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="grayDiv" ng-if="!showPlaylist && !showUserinfo">
+
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">   
+                <br> 
+                <img src="{{ img }}" width="100px" height="100px" />
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <h2>User:</h2>
+                <div>
+                    <span class="thick">Name:</span>
+                    <span>{{ name }}</span>
+                </div>
+                <div>
+                    <span class="thick">Id:</span>
+                    <span>{{ id }}</span>
+                </div>
+                <div>
+                    <span class="thick">Email:</span>
+                    <span>{{ em }}</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <button class="btn btn-danger btn-md" type="button" ng-click="logout()">
+                    <i class="glyphicon glyphicon-remove"></i>
+                    Logout
+                </button>
+
+            </div>
+        </div>
+        <!-- Show this div if the view is on the current user with the playlists
+        closed -->
+        <div class="createPlayListDiv" ng-if="!showUserinfo && !showPlaylist">
+           
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <h3>Playlists:</h3>
+            </div>
+           
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-top:10px">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Create playlist">
+                    <span class="input-group-btn">
+                        <button class="btn btn-success" type="button" ng-click="createNewPlaylist()">
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </button>
+                    </span>
+                </div>  
+            </div>
+
+        </div>
+
+        <!-- Show this div if visiting another user profile and playlist is closed -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="grayDiv" ng-if="!showPlaylist && showUserinfo">
+
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">   
+                <br> 
+                <img src="{{ userLookupImg }}" width="100px" height="100px" />
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <h2>User:</h2>
+                <div>
+                    <span class="thick">Name:</span>
+                    <span>{{ userLookupName }}</span>
+                </div>
+                <div>
+                    <span class="thick">Id:</span>
+                    <span>{{ userLookupId }}</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <button class="btn btn-info btn-md" type="button" ng-click="getCurrentUser();setShowUserinfo()">
+                    <i class="glyphicon glyphicon-user"></i>
+                    My profile
+                </button>
+            </div>
+        </div>
+        <div class="createPlayListDiv" ng-if="showUserinfo && !showPlaylist">
+           
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <h3>Playlists:</h3>
+            </div>
+           
+        </div>
+
+        <!-- This shows all the playlists that the owner owns -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="playlistDiv" ng-if="!showPlaylist">
+            <table class="table table-striped">
+                <tr style="font-weight:bold"> 
+                    <td>Name:</td>
+                    <td>Owner id:</td>
+                    <td>Id:</td>
+                </tr>
+                <tr ng-repeat="playlist in playlists">
+                    
+                    <td> <button class="btn btn-primary btn-sm" id="buttonPlaylist" type="button" ng-click="getPlaylist(playlist.id,playlist.owner.id)">
+                            {{ playlist.name }}
+                         </button> </td>
+
+                    <td>{{ playlist.owner.id }}</td>
+
+                    <td>{{ playlist.id }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="showPlaylist">
+		
+		<div class="col-lg-offset-2 col-lg-8 col-md-8 col-sm-8 col-xs-8" id="trackSearchDiv">
+			<div angucomplete-alt id="trackSearchInput" 
+            placeholder="Search for tracks to add" 
+            pause="400" 
+            selected-object="selectedTrack" 
+            remote-url="https://api.spotify.com/v1/search" 
+            remote-url-request-formatter="dataFormatFn" 
+            remote-url-data-field="tracks.items" 
+            title-field="name" 
+            description-field="artists.0.name" 
+            image-field="album.images.2.url" 
+            minlength="1" 
+            match-class="highlight" 
+            input-class="form-control form-control-small">
+			</div>
+		</div>  
+            
+            <button class="btn btn-success btn-md" id="floatRight" type="button" ng-click="playPlaylist()">
+                <i class="glyphicon glyphicon-play"></i>
+                Play playlist           
+            </button>
+    	    <button class="btn btn-danger btn-md" id="floatRight" type="button" ng-click="setShowPlaylist()">
+                <i class="glyphicon glyphicon-remove"></i>
+                Close playlist           
+            </button>
+	        <div class="floatLeft">
+                <h3>Playlist: </h3>   
+            </div>
+
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="trackDiv">
+                <table class="table table-striped">
+                    <tr style="font-weight:bold"> 
+                        <td>Name:</td>
+                        <td>#vote:</td>
+                        <td>Vote:</td>
+                        <td></td>
+                    </tr>
+                    <tr ng-repeat="trackie in tracks">
+                        <td style="overflow-y: auto;">{{trackie.track.name}}</td>
+                        <td>0</td>
+                        <td>
+                            <button class="btn btn-success btn-xs" type="button" ng-click="voteTrack()">
+                                Vote  
+                                <i class="glyphicon glyphicon-chevron-up"></i>          
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-xs" type="button" ng-click="removeTrack(trackie.track.id, trackie.track.name)">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <button class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn btn-md" type="button" ng-click="loadMoreTracks()">
+                    <i class="glyphicon glyphicon-chevron-down"></i>          
+                </button>
+            </div>
+            
+
+        </div> 
+    </div>  
+
+    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 embed-container">
+            <iframe ng-src="{{currentPlayinglistUrl}}"  frameborder="0" allowtransparency="true" > </iframe>
+    </div>
+
+</div>

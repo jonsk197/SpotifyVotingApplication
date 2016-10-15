@@ -1,0 +1,19 @@
+{
+  "name": "static",
+  "version": "0.0.0",
+  "authors": [
+    "jonsk197 <jonsk197@student.liu.se>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-spotify": "~0.12.0",
+    "angucomplete-alt": "~0.0.39"
+  }
+}

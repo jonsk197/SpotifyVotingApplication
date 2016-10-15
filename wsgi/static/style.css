@@ -1,0 +1,109 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	background:url('img/loginwall.png') no-repeat fixed center center;
+	background-size: cover;                     
+}
+
+.container{
+	background-color: white;
+	height: 100%;
+	overflow-y:scroll;
+}
+#loginDiv{
+}
+
+#searchDiv{
+	padding-top: 0.5%;
+	padding-bottom: 0.5%;
+}
+
+#userinfoDiv{
+	padding-bottom: 0.5%;
+}
+
+#trackDiv{
+	overflow-y: scroll;
+	max-height: 70%;
+}
+
+#playlistDiv{
+	overflow-y: scroll;
+}
+
+#grayDiv{
+	background-color: #f7f7f9;
+	padding-bottom: 0.5%;
+	padding-top: 0.5%;
+}
+
+#createPlayListDiv{
+	background-color: white;
+	padding-bottom: 0.5%;
+	padding-top: 0.5%;	
+}
+
+
+
+
+
+
+#floatRight{
+	float: right;
+}
+
+#floatLeft{
+	float:  left;
+}
+
+#buttonPlaylist{
+	width: 100%;
+}
+
+#headline{
+	font-size:250%;
+	font-family: 'Shift', sans-serif;
+	color: white;
+}
+
+#underline{
+	width: 60%;
+	font-size: 150%;
+	font-family: 'Shift', sans-serif;
+	color: white;	
+}
+
+#center{
+	position: relative; 
+	left: 33%;
+}
+
+.thick {
+    font-weight: bold;
+    margin-right: 2%;
+}
+
+table, th , td {
+  padding: 1px;
+  border-collapse: collapse;
+}
+
+.embed-container {
+    position: relative;
+    max-height: 100%;
+    padding-bottom: 56.25%;
+    max-width: 100%;
+}
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.highlight {
+    color: red;
+}

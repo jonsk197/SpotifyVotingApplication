@@ -1,0 +1,33 @@
+<html lang="en" ng-app="votingApp">
+    <head> 
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>Spotify Voting Application</title>
+
+        <link rel="stylesheet" href="static/modules/angucomplete-alt/angucomplete-alt.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="static/style.css"/>
+        <link rel="shortcut icon" href="static/img/logo1.png"/>
+
+        <script src="/static/modules/angular/angular.js"></script>
+        <script src="/static/modules/angular-ui-router/angular-ui-router.js"></script>
+        <script src="/static/modules/angular-spotify/angular-spotify.js"></script>
+        <script src="/static/modules/angular-bootstrap/ui-bootstrap.js"></script>
+        <script src="/static/modules/angucomplete-alt/angucomplete-alt.js"></script>
+        <script src="static/js/app.js"></script>
+        <script src="static/js/controllers/callbackCtrl.js"></script>
+        <script src="static/js/controllers/loginCtrl.js"></script>
+        <script src="static/js/controllers/homeCtrl.js"></script>
+        
+        <!-- These 3 scripts are not in use yet -->
+        <script src="static/js/controllers/accountCtrl.js"></script>    
+        <script src="static/js/controllers/profileCtrl.js"></script>
+        <script src="static/js/services.js"></script>
+
+        
+    </head>
+    <body>
+        <div ui-view></div>
+    </body>
+</html>
