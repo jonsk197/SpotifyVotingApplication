@@ -7,8 +7,6 @@ The members that will be working with this project are: Milad Barsomo (milba894)
 The openshift link:
 http://votingapp-spotifyvotingapp.openshift.ida.liu.se/#/
 
-The screencast:
-https://youtu.be/5oyCemzfatE
 ***
 
 Functional specification:
